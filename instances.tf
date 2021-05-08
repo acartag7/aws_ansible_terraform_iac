@@ -44,7 +44,7 @@ resource "aws_instance" "jenkins-master-instance" {
   provisioner "local-exec" {
     command = <<EOF
 aws --profile ${var.profile} ec2 wait instance-status-ok --region ${var.region-master} --instance-ids ${self.id}
-ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible_templates/jenkins-master-sample.yml
+ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible/master-deploy.yml
 EOF
   }
 }
@@ -68,7 +68,7 @@ resource "aws_instance" "jenkins-worker-instance" {
 provisioner "local-exec" {
     command = <<EOF
 aws --profile ${var.profile} ec2 wait instance-status-ok --region ${var.region-worker} --instance-ids ${self.id}
-ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible_templates/jenkins-worker-sample.yml
+ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible/worker-deploy.yml
 EOF
 }
 }
