@@ -1,5 +1,6 @@
+#Ansible Jenkins Master, sample playbook - master-deploy.yml
 ---
-- hosts: "{{ passed in hosts }}"
+- hosts: "{{ passed_in_hosts }}"
   become: yes
   remote_user: ec2-user
   become_user: root
