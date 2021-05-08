@@ -43,8 +43,9 @@ resource "aws_instance" "jenkins-master-instance" {
 
   provisioner "local-exec" {
     command = <<EOF
-    aws --profile ${var.profile} ec2 wait instance status-ok --region${var.region-master} --instance-ids ${self.id}
-    ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_$self.tags.Name' ansible-playbooks/server-master.yaml
+    aws --profile ${var.profile} ec2 wait instance status-ok --region ${var.region-master} --instance-ids ${self.id}
+    ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible_templates/server-master.yaml
+
     EOF
   }
 }
@@ -67,8 +68,8 @@ resource "aws_instance" "jenkins-worker-instance" {
   depends_on = [aws_main_route_table_association.set-worker-default-rt-assoc, aws_instance.jenkins-master-instance]
   provisioner "local-exec" {
     command = <<EOF
-    aws --profile ${var.profile} ec2 wait instance status-ok --region${var.region-worker} --instance-ids ${self.id}
-    ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_$self.tags.Name' ansible-playbooks/server-worker.yaml
+    aws --profile ${var.profile} ec2 wait instance status-ok --region ${var.region-worker} --instance-ids ${self.id}
+    ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansible-playbooks/server-worker.yaml
     EOF
   }
 }
