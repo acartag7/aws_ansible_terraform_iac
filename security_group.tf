@@ -47,17 +47,17 @@ resource "aws_security_group" "instance-sg-master-vpc" {
     cidr_blocks = [var.external_ip]
   }
   ingress {
-    description = "Allow 8080 from Application Load Balancer"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
+    description     = "Allow 8080 from Application Load Balancer"
+    from_port       = 8080
+    to_port         = 8080
+    protocol        = "tcp"
     security_groups = [aws_security_group.alb-sg-master.id]
   }
   ingress {
-    description = "Allow traffic from us-west-2"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description     = "Allow traffic from us-west-2"
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
     security_groups = ["192.168.1.0/24"]
   }
   egress {
@@ -88,10 +88,10 @@ resource "aws_security_group" "instance-sg-worker-vpc" {
     cidr_blocks = [var.external_ip]
   }
   ingress {
-    description = "Allow traffic from us-east-1"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description     = "Allow traffic from us-east-1"
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
     security_groups = ["10.0.1.0/24"]
   }
   egress {
