@@ -83,18 +83,18 @@ resource "aws_vpc_peering_connection_accepter" "accept-peering-vpc_master" {
   auto_accept               = true
 }
 
-
+#Create Route Table in us-east-1
 resource "aws_route_table" "internet_route_vpc-master" {
   provider = aws.region-master
   vpc_id   = aws_vpc.vpc_master.id
 
   route {
-    cidr_block                = "192.168.0.0/16"
+    cidr_block                = "192.168.1.0/24"
     vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
   }
   route {
     cidr_block             = "0.0.0.0/0"
-    egress_only_gateway_id = aws_internet_gateway.igw_master_vpc.id
+    gateway_id = aws_internet_gateway.igw_master_vpc.id
   }
   lifecycle {
     ignore_changes = all
@@ -102,4 +102,39 @@ resource "aws_route_table" "internet_route_vpc-master" {
   tags = {
     Name = "Master-Region-RT"
   }
+}
+
+#Overwrite default Route Table of VPC-Master with our route table entries
+resource "aws_main_route_table_association" "set-master-default-rt-assoc" {
+  provider = aws.region-master
+  vpc_id = aws_vpc.vpc_master.id
+  route_table_id = aws_route_table.internet_route_vpc-master.id  
+}
+
+#Create Route Table in us-west-1
+resource "aws_route_table" "internet_route_vpc-worker" {
+  provider = aws.region-worker
+  vpc_id   = aws_vpc.vpc_worker.id
+
+  route {
+    cidr_block                = "10.0.1.0/24"
+    vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
+  }
+  route {
+    cidr_block             = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw_worker_vpc.id
+  }
+  lifecycle {
+    ignore_changes = all
+  }
+  tags = {
+    Name = "Worker-Region-RT"
+  }
+}
+
+#Overwrite default Route Table of VPC-Worker with our route table entries
+resource "aws_main_route_table_association" "set-worker-default-rt-assoc" {
+  provider = aws.region-worker
+  vpc_id = aws_vpc.vpc_worker.id
+  route_table_id = aws_route_table.internet_route_vpc-worker.id  
 }
