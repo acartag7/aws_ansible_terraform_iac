@@ -10,7 +10,7 @@ resource "aws_security_group" "alb-sg-master" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.external_ip]
   }
   ingress {
     description = "Allow 80 from Everywhere"
