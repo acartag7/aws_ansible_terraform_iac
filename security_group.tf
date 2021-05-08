@@ -54,17 +54,17 @@ resource "aws_security_group" "instance-sg-master" {
     security_groups = [aws_security_group.alb-sg-master.id]
   }
   ingress {
-    description     = "Allow traffic from us-west-2"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
+    description = "Allow traffic from us-west-2"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["192.168.1.0/24"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -87,17 +87,17 @@ resource "aws_security_group" "instance-sg-worker" {
     cidr_blocks = [var.external_ip]
   }
   ingress {
-    description     = "Allow traffic from us-east-1"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
+    description = "Allow traffic from us-east-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["10.0.1.0/24"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
