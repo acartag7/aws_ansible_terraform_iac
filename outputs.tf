@@ -15,3 +15,4 @@ output "Jenkins-Worker-Node-Public-IP" {
       for instance in aws_instance.jenkins-worker-instance :
       "${lookup(aws_instance.jenkins-worker-instance.tags)}" => instance.public_ip
 }
+}
