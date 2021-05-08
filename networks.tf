@@ -91,7 +91,6 @@ resource "aws_route_table" "internet_route_vpc-master" {
   route = [ {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw_master_vpc.id
-    #vpc_peering_connection_id = "value"
   } ] 
   lifecycle {
     ignore_changes = all
