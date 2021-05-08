@@ -4,3 +4,4 @@ aws iam create-policy --policy-name IAM-TerraformPolicy --policy-document file:/
 aws iam attach-user-policy --policy-arn arn:aws:iam::..............IAM-TerraformPolicy --user-name cloud_user 
 #Create S3 Bucket
 aws s3api create-bucket --bucket terraform-config-state050821
+aws s3 cp s3://terraform-config-state0508211/terraformstatefile .
