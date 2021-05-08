@@ -70,30 +70,30 @@ resource "aws_subnet" "subnet-1-worker" {
 
 #Initiate Peering connection request from us-east-1
 resource "aws_vpc_peering_connection" "useast1-uswest2" {
-  provider = aws.region-master
+  provider    = aws.region-master
   peer_vpc_id = aws_vpc.vpc_worker.id
-  vpc_id = aws_vpc.vpc_master.id
+  vpc_id      = aws_vpc.vpc_master.id
   peer_region = var.region-worker
 }
 
 #Accept VPC peering request in us-west-2 from us-east-1
 resource "aws_vpc_peering_connection_accepter" "accept-peering-vpc_master" {
-  provider = aws.region-worker
+  provider                  = aws.region-worker
   vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
-  auto_accept = true
+  auto_accept               = true
 }
 
 
 resource "aws_route_table" "internet_route_vpc-master" {
   provider = aws.region-master
-  vpc_id = aws_vpc.vpc_master.id
+  vpc_id   = aws_vpc.vpc_master.id
 
   route {
-    cidr_block = "192.168.0.0/16"
+    cidr_block                = "192.168.0.0/16"
     vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
   }
   route {
-    cidr_block        = "0.0.0.0/0"
+    cidr_block             = "0.0.0.0/0"
     egress_only_gateway_id = aws_internet_gateway.igw_master_vpc.id
   }
   lifecycle {
