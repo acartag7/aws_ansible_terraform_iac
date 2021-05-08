@@ -20,12 +20,12 @@ variable "external_ip" {
 
 variable "workers-count" {
   type    = number
-  default = 0
+  default = 3
 }
 
 variable "masters-count" {
   type    = number
-  default = 0
+  default = 1
 }
 
 variable "instance-type" {
