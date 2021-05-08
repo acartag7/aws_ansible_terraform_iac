@@ -46,7 +46,7 @@ resource "aws_subnet" "subnet-1-master" {
   cidr_block        = "10.0.1.0/24"
   tags = {
     Name = "Master-Subnet-1"
-  }  
+  }
 }
 
 #Create subnet #2 in us-east-1
@@ -57,7 +57,7 @@ resource "aws_subnet" "subnet-2-master" {
   cidr_block        = "10.0.2.0/24"
   tags = {
     Name = "Master-Subnet-2"
-  } 
+  }
 }
 
 #Get all AZ in VPC for Worker Region
@@ -74,7 +74,7 @@ resource "aws_subnet" "subnet-1-worker" {
   cidr_block        = "192.168.1.0/24"
   tags = {
     Name = "Worker-Subnet-1"
-  } 
+  }
 }
 
 #Initiate Peering connection request from us-east-1
