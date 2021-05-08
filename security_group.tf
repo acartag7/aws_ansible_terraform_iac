@@ -44,14 +44,14 @@ resource "aws_security_group" "instance-sg-master" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["var.external_ip"]
   }
   ingress {
     description     = "Allow 8080 from Application Load Balancer"
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
-    security_groups = [aws_security_group.alb-sg-master.id]
+    security_groups = ["aws_security_group.alb-sg-master.id"]
   }
   ingress {
     description     = "Allow traffic from us-west-2"
@@ -85,7 +85,7 @@ resource "aws_security_group" "instance-sg-worker" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["var.external_ip"]
   }
   ingress {
     description     = "Allow traffic from us-east-1"
