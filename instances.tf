@@ -26,14 +26,14 @@ resource "aws_key_pair" "worker-instance-key" {
 
 #Create and Bootstrap ec2 in us-east-1
 resource "aws_instance" "jenkins-master-instance" {
-  provider = aws.region-master
-  ami = data.aws_ssm_parameter.linuxAmi-master.value
-  instance_type = "var.instance-type"
-  key_name = aws_key_pair.master-instance-key.key_name
+  provider                    = aws.region-master
+  ami                         = data.aws_ssm_parameter.linuxAmi-master.value
+  instance_type               = "var.instance-type"
+  key_name                    = aws_key_pair.master-instance-key.key_name
   associate_public_ip_address = true
-  vpc_security_group_ids = [aws_security_group.instance-sg-master.id]
-  subnet_id = aws_subnet.subnet-1-master.id
-  
+  vpc_security_group_ids      = [aws_security_group.instance-sg-master.id]
+  subnet_id                   = aws_subnet.subnet-1-master.id
+
   tags = {
     Name = "JenkinsMaster_TF"
   }
@@ -43,17 +43,17 @@ resource "aws_instance" "jenkins-master-instance" {
 
 #Create and Bootstrap ec2 in us-west-2
 resource "aws_instance" "jenkins-worker-instance" {
-  provider = aws.region-worker
-  count = var.workers-count
-  ami = data.aws_ssm_parameter.linuxAmi-worker.value
-  instance_type = "var.instance-type"
-  key_name = aws_key_pair.worker-instance-key.key_name
+  provider                    = aws.region-worker
+  count                       = var.workers-count
+  ami                         = data.aws_ssm_parameter.linuxAmi-worker.value
+  instance_type               = "var.instance-type"
+  key_name                    = aws_key_pair.worker-instance-key.key_name
   associate_public_ip_address = true
-  vpc_security_group_ids = [aws_security_group.instance-sg-worker.id]
-  subnet_id = aws_subnet.subnet-1-worker.id
-  
+  vpc_security_group_ids      = [aws_security_group.instance-sg-worker.id]
+  subnet_id                   = aws_subnet.subnet-1-worker.id
+
   tags = {
-    Name = join("_", ["JenkinsWorker_TF", count.index +1])
+    Name = join("_", ["JenkinsWorker_TF", count.index + 1])
   }
 
   depends_on = [aws_main_route_table_association.set-worker-default-rt-assoc, aws_instance.jenkins-master-instance]
