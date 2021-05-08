@@ -67,3 +67,60 @@ resource "aws_subnet" "subnet-1-worker" {
   vpc_id            = aws_vpc.vpc_worker.id
   cidr_block        = "192.168.1.0/24"
 }
+
+#Initiate Peering connection request from us-east-1
+resource "aws_vpc_peering_connection" "useast1-uswest2" {
+  provider = aws.region-master
+  peer_vpc_id = aws_vpc.vpc_worker.id
+  vpc_id = aws_vpc.vpc_master.id
+  peer_region = var.region-worker
+}
+
+#Accept VPC peering request in us-west-2 from us-east-1
+resource "aws_vpc_peering_connection_accepter" "accept-peering-vpc_master" {
+  provider = aws.region-worker
+  vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
+  auto_accept = true
+}
+
+
+#Create route table in us-east-1
+resource "aws_route_table" "internet_route_vpc-master" {
+  provider = aws.region-master
+  vpc_id = aws_vpc.vpc_master.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw_master_vpc.id
+  }
+  lifecycle {
+    ignore_changes = all
+  }
+  tags = {
+    Name = "Master-Region-RT"
+  }
+}
+
+#Create route table in us-west-1
+resource "aws_route_table" "internet_route_vpc-worker" {
+  provider = aws.region-worker
+  vpc_id = aws_vpc.vpc_worker.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw_worker_vpc.id
+  }
+  route = [ {
+    cidr_block = "192.168.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
+  } ]  
+  route = [ {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw_master_vpc.id
+  } ]
+  lifecycle {
+    ignore_changes = all
+  }
+  tags = {
+    Name = "Worker-Region-RT"
+  }
+}
+
