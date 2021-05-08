@@ -28,7 +28,7 @@ resource "aws_key_pair" "worker-instance-key" {
 resource "aws_instance" "jenkins-master-instance" {
   provider                    = aws.region-master
   ami                         = data.aws_ssm_parameter.linuxAmi-master.value
-  instance_type               = "var.instance-type"
+  instance_type               = var.instance-type
   key_name                    = aws_key_pair.master-instance-key.key_name
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.instance-sg-master.id]
@@ -46,7 +46,7 @@ resource "aws_instance" "jenkins-worker-instance" {
   provider                    = aws.region-worker
   count                       = var.workers-count
   ami                         = data.aws_ssm_parameter.linuxAmi-worker.value
-  instance_type               = "var.instance-type"
+  instance_type               = var.instance-type
   key_name                    = aws_key_pair.worker-instance-key.key_name
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.instance-sg-worker.id]
