@@ -15,5 +15,5 @@ variable "region-worker" {
 
 variable "external_ip" {
   type    = string
-  default = "0.0.0.0/0"
+  default = "46.6.3.14/32"
 }
