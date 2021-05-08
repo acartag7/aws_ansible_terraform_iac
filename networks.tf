@@ -84,13 +84,17 @@ resource "aws_vpc_peering_connection_accepter" "accept-peering-vpc_master" {
 }
 
 
-#Create route table in us-east-1
 resource "aws_route_table" "internet_route_vpc-master" {
   provider = aws.region-master
   vpc_id = aws_vpc.vpc_master.id
-  route = {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw_master_vpc.id
+
+  route {
+    cidr_block = "192.168.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
+  }
+  route {
+    cidr_block        = "0.0.0.0/0"
+    egress_only_gateway_id = aws_internet_gateway.igw_master_vpc.id
   }
   lifecycle {
     ignore_changes = all
@@ -99,5 +103,3 @@ resource "aws_route_table" "internet_route_vpc-master" {
     Name = "Master-Region-RT"
   }
 }
-
-
