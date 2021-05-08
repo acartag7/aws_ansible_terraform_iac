@@ -17,3 +17,13 @@ variable "external_ip" {
   type    = string
   default = "46.6.3.14/32"
 }
+
+variable "workers-count" {
+  type = number
+  default = 1
+}
+
+variable "instance-type" {
+  type = string
+  default = "t3.micro"
+}
