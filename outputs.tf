@@ -1,5 +1,5 @@
 output "Jenkins-Master-Node-Public-IP" {
-  value = aws_instance.jenkins-master-instance.public_ip
+  value = aws_instance.jenkins-master-instance.*.public_ip
 }
 
 output "Jenkins-Worker-Node-Public-IP" {
