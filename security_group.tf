@@ -33,7 +33,7 @@ resource "aws_security_group" "alb-sg-master" {
 }
 
 #Create Security Group for Master Instance, Only TCP/8080 from ALB,TCP/22 from local ip
-resource "aws_security_group" "instance-sg-master-vpc" {
+resource "aws_security_group" "instance-sg-master" {
   provider    = aws.region-master
   name        = "instance-master-sg"
   description = "Allow TCP/8080 and TCP/22"
@@ -74,7 +74,7 @@ resource "aws_security_group" "instance-sg-master-vpc" {
 }
 
 #Create Security Group for Master Instance, Only TCP/8080 from ALB,TCP/22 from local ip
-resource "aws_security_group" "instance-sg-worker-vpc" {
+resource "aws_security_group" "instance-sg-worker" {
   provider    = aws.region-worker
   name        = "instance-worker-sg"
   description = "Allow TCP/8080 and TCP/22"
