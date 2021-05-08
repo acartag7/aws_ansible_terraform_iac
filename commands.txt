@@ -1,4 +1,0 @@
-#Create Policy
-aws iam create-policy --policy-name IAM-TerraformPolicy --policy-document file://terraform-iam-policy.json --description Provides Access to Terraform to deploy the Infrastructure
-#Attach a policy to User
-aws iam attach-user-policy --policy-arn arn:aws:iam::..............IAM-TerraformPolicy --user-name cloud_user 
