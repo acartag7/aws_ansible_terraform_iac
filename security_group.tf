@@ -10,7 +10,7 @@ resource "aws_security_group" "alb-sg-master" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = [var.external_ip]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
     description = "Allow 80 from Everywhere"
@@ -66,10 +66,6 @@ resource "aws_security_group" "instance-sg-master" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Name = "instance-master-securitygroup"
-  }
 }
 
 #Create Security Group for Master Instance, Only TCP/8080 from ALB,TCP/22 from local ip
@@ -98,10 +94,6 @@ resource "aws_security_group" "instance-sg-worker" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "instance-worker-securitygroup"
   }
 }
 
