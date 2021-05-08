@@ -104,6 +104,3 @@ resource "aws_security_group" "instance-sg-worker" {
     Name = "instance-worker-securitygroup"
   }
 }
-
-
-
