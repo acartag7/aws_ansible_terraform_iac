@@ -23,6 +23,11 @@ variable "workers-count" {
   default = 0
 }
 
+variable "masters-count" {
+  type    = number
+  default = 0
+}
+
 variable "instance-type" {
   type    = string
   default = "t3.micro"

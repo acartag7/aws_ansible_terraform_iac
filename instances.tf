@@ -27,6 +27,7 @@ resource "aws_key_pair" "worker-instance-key" {
 #Create and Bootstrap ec2 in us-east-1
 resource "aws_instance" "jenkins-master-instance" {
   provider                    = aws.region-master
+  count                       = var.masters-count
   ami                         = data.aws_ssm_parameter.linuxAmi-master.value
   instance_type               = var.instance-type
   key_name                    = aws_key_pair.master-instance-key.key_name
@@ -39,6 +40,13 @@ resource "aws_instance" "jenkins-master-instance" {
   }
 
   depends_on = [aws_main_route_table_association.set-master-default-rt-assoc]
+
+  provisioner "local-exec" {
+    command = <<EOF
+    aws --profile ${var.profile} ec2 wait instance status-ok --region${var.region-master} --instance-ids ${self.id}
+    ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_$self.tags.Name' ansible-playbooks/server-master.yaml
+    EOF
+  }
 }
 
 #Create and Bootstrap ec2 in us-west-2
