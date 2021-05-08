@@ -9,7 +9,3 @@ output "Jenkins-Worker-Node-Public-IP" {
   }
 }
 
-
-#output "Jenkins-Worker-Node-Public-IP" {
-#  value = aws_instance.jenkins-worker-instance.*.tags => aws_instance.jenkins-worker-instance.*.public_ip
-#}
