@@ -51,7 +51,7 @@ resource "aws_security_group" "instance-sg-master" {
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
-    security_groups = ["aws_security_group.alb-sg-master.id"]
+    security_groups = [aws_security_group.alb-sg-master.id]
   }
   ingress {
     description     = "Allow traffic from us-west-2"
@@ -68,7 +68,7 @@ resource "aws_security_group" "instance-sg-master" {
   }
 
   tags = {
-    Name = "instance-master"
+    Name = "instance-master-securitygroup"
   }
 }
 
@@ -101,6 +101,9 @@ resource "aws_security_group" "instance-sg-worker" {
   }
 
   tags = {
-    Name = "instance-worker"
+    Name = "instance-worker-securitygroup"
   }
 }
+
+
+
