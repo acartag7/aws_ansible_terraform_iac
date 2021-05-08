@@ -38,7 +38,7 @@ resource "aws_instance" "jenkins-master-instance" {
     Name = "JenkinsMaster_TF"
   }
 
-  depends_on - [aws_main_route_table_association.set-master-default-rt-assoc]
+  depends_on = [aws_main_route_table_association.set-master-default-rt-assoc]
 }
 
 #Create and Bootstrap ec2 in us-west-2
@@ -56,5 +56,5 @@ resource "aws_instance" "jenkins-worker-instance" {
     Name = join("_", ["JenkinsWorker_TF", count.index +1])
   }
 
-  depends_on - [aws_main_route_table_association.set-worker-default-rt-assoc, aws_instance.jenkins-master-instance]
+  depends_on = [aws_main_route_table_association.set-worker-default-rt-assoc, aws_instance.jenkins-master-instance]
 }
