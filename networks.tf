@@ -20,6 +20,10 @@ resource "aws_vpc" "vpc_worker" {
   }
 }
 
+resource "aws_vpc" "test" {
+  # (resource arguments)
+}
+
 #Create IGW in us-east-1
 resource "aws_internet_gateway" "igw_master_vpc" {
   provider = aws.region-master
