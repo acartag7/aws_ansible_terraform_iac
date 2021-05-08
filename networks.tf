@@ -93,7 +93,7 @@ resource "aws_route_table" "internet_route_vpc-master" {
     vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
   }
   route {
-    cidr_block             = "0.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw_master_vpc.id
   }
   lifecycle {
@@ -106,9 +106,9 @@ resource "aws_route_table" "internet_route_vpc-master" {
 
 #Overwrite default Route Table of VPC-Master with our route table entries
 resource "aws_main_route_table_association" "set-master-default-rt-assoc" {
-  provider = aws.region-master
-  vpc_id = aws_vpc.vpc_master.id
-  route_table_id = aws_route_table.internet_route_vpc-master.id  
+  provider       = aws.region-master
+  vpc_id         = aws_vpc.vpc_master.id
+  route_table_id = aws_route_table.internet_route_vpc-master.id
 }
 
 #Create Route Table in us-west-1
@@ -121,7 +121,7 @@ resource "aws_route_table" "internet_route_vpc-worker" {
     vpc_peering_connection_id = aws_vpc_peering_connection.useast1-uswest2.id
   }
   route {
-    cidr_block             = "0.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw_worker_vpc.id
   }
   lifecycle {
@@ -134,7 +134,7 @@ resource "aws_route_table" "internet_route_vpc-worker" {
 
 #Overwrite default Route Table of VPC-Worker with our route table entries
 resource "aws_main_route_table_association" "set-worker-default-rt-assoc" {
-  provider = aws.region-worker
-  vpc_id = aws_vpc.vpc_worker.id
-  route_table_id = aws_route_table.internet_route_vpc-worker.id  
+  provider       = aws.region-worker
+  vpc_id         = aws_vpc.vpc_worker.id
+  route_table_id = aws_route_table.internet_route_vpc-worker.id
 }
