@@ -13,6 +13,6 @@ output "Jenkins-Master-Node-Public-IP" {
 output "Jenkins-Worker-Node-Public-IP" {
   value = {
       for instance in aws_instance.jenkins-worker-instance :
-      "${lookup(aws_instance.jenkins-worker-instance.tags)}" => instance.public_ip
+      "${lookup(instance.tags)}" => instance.public_ip
 }
 }
