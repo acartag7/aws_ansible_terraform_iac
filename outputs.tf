@@ -11,8 +11,5 @@ output "Jenkins-Master-Node-Public-IP" {
 
 
 output "Jenkins-Worker-Node-Public-IP" {
-  value = {
-      for instance in aws_instance.jenkins-worker-instance :
-      instance.*.tags => instance.public_ip
-}
+  value = aws_instance.jenkins-worker-instance.*.tags => aws_instance.jenkins-worker-instance.*.public_ip
 }
