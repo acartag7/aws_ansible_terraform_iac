@@ -22,6 +22,7 @@ resource "aws_vpc" "vpc_worker" {
 
 resource "aws_vpc" "test" {
   # (resource arguments)
+  provider             = aws.region-master
 }
 
 #Create IGW in us-east-1
