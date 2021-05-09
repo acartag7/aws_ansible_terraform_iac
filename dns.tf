@@ -21,3 +21,16 @@ resource "aws_route53_record" "cert_validation" {
     type = each.value.type
     zone_id = data.aws_route53_zone.dns.zone_id
 }
+
+#Create Alias record towards ALB from ROUTE53
+resource "aws_route53_record" "frontend-lb" {
+  provider = aws.region-master
+  zone_id = data.aws_route53_zone.dns.zone_id
+  name = join(".", ["frontend", data.aws_route53_zone.dns.name])
+  type = "A"
+  alias {
+    name =  aws_alb.application-lb-master.dns_name
+    zone_id = aws_alb.application-lb-master.zone_id
+    evaluate_target_health = true
+  }
+}
