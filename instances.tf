@@ -36,7 +36,7 @@ resource "aws_instance" "jenkins-master-instance" {
   subnet_id                   = aws_subnet.subnet-1-master.id
 
   tags = {
-    Name = "JenkinsMaster_TF"
+    Name = "jenkins_master_tf"
   }
 
   depends_on = [aws_main_route_table_association.set-master-default-rt-assoc]
@@ -48,6 +48,7 @@ ansible-playbook --extra-vars 'passed_in_hosts=tag_Name_${self.tags.Name}' ansib
 EOF
   }
 }
+
 
 #Create and Bootstrap ec2 in us-west-2
 resource "aws_instance" "jenkins-worker-instance" {
@@ -61,7 +62,7 @@ resource "aws_instance" "jenkins-worker-instance" {
   subnet_id                   = aws_subnet.subnet-1-worker.id
 
   tags = {
-    Name = join("_", ["JenkinsWorker_TF", count.index + 1])
+    Name = join("_", ["jenkins_worker_tf", count.index + 1])
   }
 
   depends_on = [aws_main_route_table_association.set-worker-default-rt-assoc, aws_instance.jenkins-master-instance]
