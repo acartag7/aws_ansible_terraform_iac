@@ -44,6 +44,6 @@ resource "aws_alb_listener" "front-lb-master-listener" {
 resource "aws_alb_target_group_attachment" "frontend-master-attach" {
   provider         = aws.region-master
   target_group_arn = aws_lb_target_group.front-lb-master-tg.arn
-  target_id        = aws_instance.jenkins-master-instance.*.id
+  target_id        = aws_instance.jenkins-master-instance.id
   port             = var.webserver-port
 }
