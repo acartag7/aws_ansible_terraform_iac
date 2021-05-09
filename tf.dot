@@ -1,0 +1,146 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_acm_certificate.frontend-lb-https (expand)" [label = "aws_acm_certificate.frontend-lb-https", shape = "box"]
+		"[root] aws_acm_certificate_validation.cert (expand)" [label = "aws_acm_certificate_validation.cert", shape = "box"]
+		"[root] aws_alb.application-lb-master (expand)" [label = "aws_alb.application-lb-master", shape = "box"]
+		"[root] aws_alb_listener.front-lb-master443-listener (expand)" [label = "aws_alb_listener.front-lb-master443-listener", shape = "box"]
+		"[root] aws_alb_listener.front-lb-master80-listener (expand)" [label = "aws_alb_listener.front-lb-master80-listener", shape = "box"]
+		"[root] aws_alb_target_group_attachment.frontend-master-attach (expand)" [label = "aws_alb_target_group_attachment.frontend-master-attach", shape = "box"]
+		"[root] aws_instance.jenkins-master-instance (expand)" [label = "aws_instance.jenkins-master-instance", shape = "box"]
+		"[root] aws_instance.jenkins-worker-instance (expand)" [label = "aws_instance.jenkins-worker-instance", shape = "box"]
+		"[root] aws_internet_gateway.igw_master_vpc (expand)" [label = "aws_internet_gateway.igw_master_vpc", shape = "box"]
+		"[root] aws_internet_gateway.igw_worker_vpc (expand)" [label = "aws_internet_gateway.igw_worker_vpc", shape = "box"]
+		"[root] aws_key_pair.master-instance-key (expand)" [label = "aws_key_pair.master-instance-key", shape = "box"]
+		"[root] aws_key_pair.worker-instance-key (expand)" [label = "aws_key_pair.worker-instance-key", shape = "box"]
+		"[root] aws_lb_target_group.front-lb-master-tg (expand)" [label = "aws_lb_target_group.front-lb-master-tg", shape = "box"]
+		"[root] aws_main_route_table_association.set-master-default-rt-assoc (expand)" [label = "aws_main_route_table_association.set-master-default-rt-assoc", shape = "box"]
+		"[root] aws_main_route_table_association.set-worker-default-rt-assoc (expand)" [label = "aws_main_route_table_association.set-worker-default-rt-assoc", shape = "box"]
+		"[root] aws_route53_record.cert_validation (expand)" [label = "aws_route53_record.cert_validation", shape = "box"]
+		"[root] aws_route53_record.frontend-lb (expand)" [label = "aws_route53_record.frontend-lb", shape = "box"]
+		"[root] aws_route_table.internet_route_vpc-master (expand)" [label = "aws_route_table.internet_route_vpc-master", shape = "box"]
+		"[root] aws_route_table.internet_route_vpc-worker (expand)" [label = "aws_route_table.internet_route_vpc-worker", shape = "box"]
+		"[root] aws_security_group.alb-sg-master (expand)" [label = "aws_security_group.alb-sg-master", shape = "box"]
+		"[root] aws_security_group.instance-sg-master (expand)" [label = "aws_security_group.instance-sg-master", shape = "box"]
+		"[root] aws_security_group.instance-sg-worker (expand)" [label = "aws_security_group.instance-sg-worker", shape = "box"]
+		"[root] aws_subnet.subnet-1-master (expand)" [label = "aws_subnet.subnet-1-master", shape = "box"]
+		"[root] aws_subnet.subnet-1-worker (expand)" [label = "aws_subnet.subnet-1-worker", shape = "box"]
+		"[root] aws_subnet.subnet-2-master (expand)" [label = "aws_subnet.subnet-2-master", shape = "box"]
+		"[root] aws_vpc.vpc_master (expand)" [label = "aws_vpc.vpc_master", shape = "box"]
+		"[root] aws_vpc.vpc_worker (expand)" [label = "aws_vpc.vpc_worker", shape = "box"]
+		"[root] aws_vpc_peering_connection.useast1-uswest2 (expand)" [label = "aws_vpc_peering_connection.useast1-uswest2", shape = "box"]
+		"[root] aws_vpc_peering_connection_accepter.accept-peering-vpc_master (expand)" [label = "aws_vpc_peering_connection_accepter.accept-peering-vpc_master", shape = "box"]
+		"[root] data.aws_availability_zones.azs_master (expand)" [label = "data.aws_availability_zones.azs_master", shape = "box"]
+		"[root] data.aws_availability_zones.azs_worker (expand)" [label = "data.aws_availability_zones.azs_worker", shape = "box"]
+		"[root] data.aws_route53_zone.dns (expand)" [label = "data.aws_route53_zone.dns", shape = "box"]
+		"[root] data.aws_ssm_parameter.linuxAmi-master (expand)" [label = "data.aws_ssm_parameter.linuxAmi-master", shape = "box"]
+		"[root] data.aws_ssm_parameter.linuxAmi-worker (expand)" [label = "data.aws_ssm_parameter.linuxAmi-worker", shape = "box"]
+		"[root] output.FrontEnd-LB-DNS-NAME" [label = "output.FrontEnd-LB-DNS-NAME", shape = "note"]
+		"[root] output.FrontendBalancer-URL" [label = "output.FrontendBalancer-URL", shape = "note"]
+		"[root] output.Jenkins-Master-Node-Public-IP" [label = "output.Jenkins-Master-Node-Public-IP", shape = "note"]
+		"[root] output.Jenkins-Worker-Node-Public-IP" [label = "output.Jenkins-Worker-Node-Public-IP", shape = "note"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master" [label = "provider[\"registry.terraform.io/hashicorp/aws\"].region-master", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker" [label = "provider[\"registry.terraform.io/hashicorp/aws\"].region-worker", shape = "diamond"]
+		"[root] var.dns-name" [label = "var.dns-name", shape = "note"]
+		"[root] var.external_ip" [label = "var.external_ip", shape = "note"]
+		"[root] var.instance-type" [label = "var.instance-type", shape = "note"]
+		"[root] var.masters-count" [label = "var.masters-count", shape = "note"]
+		"[root] var.profile" [label = "var.profile", shape = "note"]
+		"[root] var.region-master" [label = "var.region-master", shape = "note"]
+		"[root] var.region-worker" [label = "var.region-worker", shape = "note"]
+		"[root] var.webserver-port" [label = "var.webserver-port", shape = "note"]
+		"[root] var.workers-count" [label = "var.workers-count", shape = "note"]
+		"[root] aws_acm_certificate.frontend-lb-https (expand)" -> "[root] data.aws_route53_zone.dns (expand)"
+		"[root] aws_acm_certificate_validation.cert (expand)" -> "[root] aws_route53_record.cert_validation (expand)"
+		"[root] aws_alb.application-lb-master (expand)" -> "[root] aws_security_group.alb-sg-master (expand)"
+		"[root] aws_alb.application-lb-master (expand)" -> "[root] aws_subnet.subnet-1-master (expand)"
+		"[root] aws_alb.application-lb-master (expand)" -> "[root] aws_subnet.subnet-2-master (expand)"
+		"[root] aws_alb_listener.front-lb-master443-listener (expand)" -> "[root] aws_acm_certificate.frontend-lb-https (expand)"
+		"[root] aws_alb_listener.front-lb-master443-listener (expand)" -> "[root] aws_alb.application-lb-master (expand)"
+		"[root] aws_alb_listener.front-lb-master443-listener (expand)" -> "[root] aws_lb_target_group.front-lb-master-tg (expand)"
+		"[root] aws_alb_listener.front-lb-master80-listener (expand)" -> "[root] aws_alb.application-lb-master (expand)"
+		"[root] aws_alb_target_group_attachment.frontend-master-attach (expand)" -> "[root] aws_instance.jenkins-master-instance (expand)"
+		"[root] aws_alb_target_group_attachment.frontend-master-attach (expand)" -> "[root] aws_lb_target_group.front-lb-master-tg (expand)"
+		"[root] aws_instance.jenkins-master-instance (expand)" -> "[root] aws_key_pair.master-instance-key (expand)"
+		"[root] aws_instance.jenkins-master-instance (expand)" -> "[root] aws_main_route_table_association.set-master-default-rt-assoc (expand)"
+		"[root] aws_instance.jenkins-master-instance (expand)" -> "[root] aws_security_group.instance-sg-master (expand)"
+		"[root] aws_instance.jenkins-master-instance (expand)" -> "[root] aws_subnet.subnet-1-master (expand)"
+		"[root] aws_instance.jenkins-master-instance (expand)" -> "[root] data.aws_ssm_parameter.linuxAmi-master (expand)"
+		"[root] aws_instance.jenkins-master-instance (expand)" -> "[root] var.instance-type"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] aws_instance.jenkins-master-instance (expand)"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] aws_key_pair.worker-instance-key (expand)"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] aws_main_route_table_association.set-worker-default-rt-assoc (expand)"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] aws_security_group.instance-sg-worker (expand)"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] aws_subnet.subnet-1-worker (expand)"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] data.aws_ssm_parameter.linuxAmi-worker (expand)"
+		"[root] aws_instance.jenkins-worker-instance (expand)" -> "[root] var.workers-count"
+		"[root] aws_internet_gateway.igw_master_vpc (expand)" -> "[root] aws_vpc.vpc_master (expand)"
+		"[root] aws_internet_gateway.igw_worker_vpc (expand)" -> "[root] aws_vpc.vpc_worker (expand)"
+		"[root] aws_key_pair.master-instance-key (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master"
+		"[root] aws_key_pair.worker-instance-key (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker"
+		"[root] aws_lb_target_group.front-lb-master-tg (expand)" -> "[root] aws_vpc.vpc_master (expand)"
+		"[root] aws_lb_target_group.front-lb-master-tg (expand)" -> "[root] var.webserver-port"
+		"[root] aws_main_route_table_association.set-master-default-rt-assoc (expand)" -> "[root] aws_route_table.internet_route_vpc-master (expand)"
+		"[root] aws_main_route_table_association.set-worker-default-rt-assoc (expand)" -> "[root] aws_route_table.internet_route_vpc-worker (expand)"
+		"[root] aws_route53_record.cert_validation (expand)" -> "[root] aws_acm_certificate.frontend-lb-https (expand)"
+		"[root] aws_route53_record.frontend-lb (expand)" -> "[root] aws_alb.application-lb-master (expand)"
+		"[root] aws_route53_record.frontend-lb (expand)" -> "[root] data.aws_route53_zone.dns (expand)"
+		"[root] aws_route_table.internet_route_vpc-master (expand)" -> "[root] aws_internet_gateway.igw_master_vpc (expand)"
+		"[root] aws_route_table.internet_route_vpc-master (expand)" -> "[root] aws_vpc_peering_connection.useast1-uswest2 (expand)"
+		"[root] aws_route_table.internet_route_vpc-worker (expand)" -> "[root] aws_internet_gateway.igw_worker_vpc (expand)"
+		"[root] aws_route_table.internet_route_vpc-worker (expand)" -> "[root] aws_vpc_peering_connection.useast1-uswest2 (expand)"
+		"[root] aws_security_group.alb-sg-master (expand)" -> "[root] aws_vpc.vpc_master (expand)"
+		"[root] aws_security_group.instance-sg-master (expand)" -> "[root] aws_security_group.alb-sg-master (expand)"
+		"[root] aws_security_group.instance-sg-master (expand)" -> "[root] var.external_ip"
+		"[root] aws_security_group.instance-sg-master (expand)" -> "[root] var.webserver-port"
+		"[root] aws_security_group.instance-sg-worker (expand)" -> "[root] aws_vpc.vpc_worker (expand)"
+		"[root] aws_security_group.instance-sg-worker (expand)" -> "[root] var.external_ip"
+		"[root] aws_subnet.subnet-1-master (expand)" -> "[root] aws_vpc.vpc_master (expand)"
+		"[root] aws_subnet.subnet-1-master (expand)" -> "[root] data.aws_availability_zones.azs_master (expand)"
+		"[root] aws_subnet.subnet-1-worker (expand)" -> "[root] aws_vpc.vpc_worker (expand)"
+		"[root] aws_subnet.subnet-1-worker (expand)" -> "[root] data.aws_availability_zones.azs_worker (expand)"
+		"[root] aws_subnet.subnet-2-master (expand)" -> "[root] aws_vpc.vpc_master (expand)"
+		"[root] aws_subnet.subnet-2-master (expand)" -> "[root] data.aws_availability_zones.azs_master (expand)"
+		"[root] aws_vpc.vpc_master (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master"
+		"[root] aws_vpc.vpc_worker (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker"
+		"[root] aws_vpc_peering_connection.useast1-uswest2 (expand)" -> "[root] aws_vpc.vpc_master (expand)"
+		"[root] aws_vpc_peering_connection.useast1-uswest2 (expand)" -> "[root] aws_vpc.vpc_worker (expand)"
+		"[root] aws_vpc_peering_connection_accepter.accept-peering-vpc_master (expand)" -> "[root] aws_vpc_peering_connection.useast1-uswest2 (expand)"
+		"[root] data.aws_availability_zones.azs_master (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master"
+		"[root] data.aws_availability_zones.azs_worker (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker"
+		"[root] data.aws_route53_zone.dns (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master"
+		"[root] data.aws_route53_zone.dns (expand)" -> "[root] var.dns-name"
+		"[root] data.aws_ssm_parameter.linuxAmi-master (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master"
+		"[root] data.aws_ssm_parameter.linuxAmi-worker (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_acm_certificate_validation.cert (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_alb_listener.front-lb-master443-listener (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_alb_listener.front-lb-master80-listener (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_alb_target_group_attachment.frontend-master-attach (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_vpc_peering_connection_accepter.accept-peering-vpc_master (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.FrontEnd-LB-DNS-NAME"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.FrontendBalancer-URL"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.Jenkins-Master-Node-Public-IP"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.Jenkins-Worker-Node-Public-IP"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] var.masters-count"
+		"[root] output.FrontEnd-LB-DNS-NAME" -> "[root] aws_alb.application-lb-master (expand)"
+		"[root] output.FrontendBalancer-URL" -> "[root] aws_route53_record.frontend-lb (expand)"
+		"[root] output.Jenkins-Master-Node-Public-IP" -> "[root] aws_instance.jenkins-master-instance (expand)"
+		"[root] output.Jenkins-Worker-Node-Public-IP" -> "[root] aws_instance.jenkins-worker-instance (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master (close)" -> "[root] aws_acm_certificate_validation.cert (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master (close)" -> "[root] aws_alb_listener.front-lb-master443-listener (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master (close)" -> "[root] aws_alb_listener.front-lb-master80-listener (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master (close)" -> "[root] aws_alb_target_group_attachment.frontend-master-attach (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master (close)" -> "[root] aws_route53_record.frontend-lb (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master" -> "[root] var.profile"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master" -> "[root] var.region-master"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker (close)" -> "[root] aws_instance.jenkins-worker-instance (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker (close)" -> "[root] aws_vpc_peering_connection_accepter.accept-peering-vpc_master (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker" -> "[root] var.profile"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker" -> "[root] var.region-worker"
+		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-master (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"].region-worker (close)"
+	}
+}
+
