@@ -25,7 +25,7 @@ variable "workers-count" {
 
 variable "masters-count" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "instance-type" {
@@ -34,6 +34,6 @@ variable "instance-type" {
 }
 
 variable "webserver-port" {
-  type = number
+  type    = number
   default = 80
 }

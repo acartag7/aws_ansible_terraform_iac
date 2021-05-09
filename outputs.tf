@@ -10,5 +10,5 @@ output "Jenkins-Worker-Node-Public-IP" {
 }
 
 output "FrontEnd-LB-DNS-NAME" {
-  value = aws_alb.application-lb-master.dns-name
+  value = aws_alb.application-lb-master.dns_name
 }
