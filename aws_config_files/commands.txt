@@ -5,3 +5,6 @@ aws iam attach-user-policy --policy-arn arn:aws:iam::..............IAM-Terraform
 #Create S3 Bucket
 aws s3api create-bucket --bucket terraform-config-state050821
 aws s3 cp s3://terraform-config-state0508211/terraformstatefile .
+sudo apt install graphviz
+terraform graph > tf.dot
+cat tf.dot |dot -Tpng -otf.png
