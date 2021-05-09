@@ -15,7 +15,7 @@ variable "region-worker" {
 
 variable "external_ip" {
   type    = string
-  default = "46.6.3.14/32"
+  default = "52.56.112.156/32"
 }
 
 variable "workers-count" {
