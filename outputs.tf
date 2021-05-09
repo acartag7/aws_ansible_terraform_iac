@@ -12,3 +12,7 @@ output "Jenkins-Worker-Node-Public-IP" {
 output "FrontEnd-LB-DNS-NAME" {
   value = aws_alb.application-lb-master.dns_name
 }
+
+output "url_frontend_balancer" {
+  value = aws_route53_record.frontend-lb.fqdn
+}
