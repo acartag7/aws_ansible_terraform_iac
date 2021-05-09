@@ -20,7 +20,7 @@ variable "external_ip" {
 
 variable "workers-count" {
   type    = number
-  default = 3
+  default = 0
 }
 
 variable "masters-count" {
