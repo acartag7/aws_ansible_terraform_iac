@@ -76,7 +76,7 @@ EOF
   provisioner "remote-exec" {
     when = destroy
     inline = [
-      "java -jar /home/ec2-user/jenkins-cli.jar -auth @/home/ec2-user/jenkins_auth -s http://${aws_instance.jenkins-master-instance.private_ip}:8080 -auth @/home/ec2-user/jenkins_auth delete-node ${self.private_ip} || echo 0"
+      "java -jar /home/ec2-user/jenkins-cli.jar -auth @/home/ec2-user/jenkins_auth -s http://${aws_instance.jenkins-master-instance.private_ip}:8080 delete-node ${self.private_ip} || echo 0"
     ]
     connection {
       type        = "ssh"
