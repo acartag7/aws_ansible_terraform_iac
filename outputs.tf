@@ -13,6 +13,6 @@ output "FrontEnd-LB-DNS-NAME" {
   value = aws_alb.application-lb-master.dns_name
 }
 
-output "url_frontend_balancer" {
+output "FrontendBalancer-URL" {
   value = aws_route53_record.frontend-lb.fqdn
 }
